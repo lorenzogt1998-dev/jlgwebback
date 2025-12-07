@@ -46,6 +46,22 @@ public class BookingService {
     }
 
 
+    @Transactional
+    public Tour updateTour(Long id, Tour updatedTour) {
+        Tour existing = tourRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Tour not found: " + id));
+
+        // actualizá los campos que realmente usás en el formulario
+        if (updatedTour.getName() != null) {
+            existing.setName(updatedTour.getName());
+        }
+        if (updatedTour.getYear() != null) {
+            existing.setYear(updatedTour.getYear());
+        }
+
+        return tourRepository.save(existing);
+    }
+
     // ---------- SHOW DATES ----------
 
     @Transactional
