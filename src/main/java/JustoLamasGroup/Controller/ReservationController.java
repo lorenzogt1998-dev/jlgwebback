@@ -3,6 +3,10 @@ package JustoLamasGroup.Controller;
 
 import JustoLamasGroup.DTO.ReservationExternalRequest;
 import JustoLamasGroup.DTO.ReserveTicketLeadRequest;
+<<<<<<< HEAD
+=======
+import JustoLamasGroup.DTO.UpdateReservationFullRequest;
+>>>>>>> f179150 (se agrega dto para editar por completo las reservas)
 import JustoLamasGroup.DTO.UpdateSeatsRequest;
 import JustoLamasGroup.Entity.ShowDate;
 import JustoLamasGroup.Entity.TicketReservation;
@@ -46,13 +50,21 @@ public class ReservationController {
     }
 
 
+<<<<<<< HEAD
     // 🔥 NUEVO → Eliminar reserva
+=======
+    //  NUEVO → Eliminar reserva
+>>>>>>> f179150 (se agrega dto para editar por completo las reservas)
     @DeleteMapping("/{ShowDateId}")
     public void delete(@PathVariable Long ShowDateId) {
         bookingService.deleteReservation(ShowDateId);
     }
 
+<<<<<<< HEAD
     // 🔥 NUEVO → Actualizar asientos
+=======
+    //  NUEVO → Actualizar asientos
+>>>>>>> f179150 (se agrega dto para editar por completo las reservas)
     @PatchMapping("/{id}")
     public TicketReservation updateSeats(
             @PathVariable Long id,
@@ -74,6 +86,18 @@ public class ReservationController {
         return bookingService.getReservationsByShowDate(showDateId);
     }
 
+<<<<<<< HEAD
+=======
+    // Editar todos los campos de una reservation
+    @PatchMapping("/{id}/full")
+    public TicketReservation updateFull(
+            @PathVariable Long id,
+            @RequestBody UpdateReservationFullRequest req
+    ) {
+        return bookingService.updateReservationFull(id, req);
+    }
+
+>>>>>>> f179150 (se agrega dto para editar por completo las reservas)
     // (OPCIONAL) Confirmar reserva / seatsConfirmados
     @PatchMapping("/{id}/confirm")
     public TicketReservation confirmReservation(

@@ -2,6 +2,10 @@
 package JustoLamasGroup.Service;
 
 import JustoLamasGroup.DTO.ReserveTicketLeadRequest;
+<<<<<<< HEAD
+=======
+import JustoLamasGroup.DTO.UpdateReservationFullRequest;
+>>>>>>> f179150 (se agrega dto para editar por completo las reservas)
 import JustoLamasGroup.DTO.UpdateSeatsRequest;
 import JustoLamasGroup.Entity.ShowDate;
 import JustoLamasGroup.Entity.TicketReservation;
@@ -161,7 +165,11 @@ public class BookingService {
         return showDateRepository.save(showDate);
     }
 
+<<<<<<< HEAD
     // 🔥 NUEVO – eliminar reserva
+=======
+    //  eliminar reserva
+>>>>>>> f179150 (se agrega dto para editar por completo las reservas)
     public void deleteReservation(Long ShowDateId) {
         if (!reservationRepository.existsById(ShowDateId)) {
             throw new RuntimeException("Reservation not found");
@@ -169,7 +177,11 @@ public class BookingService {
         reservationRepository.deleteById(ShowDateId);
     }
 
+<<<<<<< HEAD
     // 🔥 NUEVO – actualizar asientos
+=======
+    //  actualizar asientos
+>>>>>>> f179150 (se agrega dto para editar por completo las reservas)
     public TicketReservation updateSeats(Long id, UpdateSeatsRequest req) {
         TicketReservation reservation =
                 reservationRepository.findById(id)
@@ -202,6 +214,29 @@ public class BookingService {
         return reservationRepository.findByShowDateId(showDateId);
     }
 
+<<<<<<< HEAD
+=======
+    // Actualización completa de la reserva
+    public TicketReservation updateReservationFull(Long id, UpdateReservationFullRequest req) {
+
+        TicketReservation r = reservationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reservation not found"));
+
+        if (req.organizationName() != null) r.setOrganizationName(req.organizationName());
+        if (req.contactName() != null) r.setContactName(req.contactName());
+        if (req.contactEmail() != null) r.setContactEmail(req.contactEmail());
+        if (req.contactPhone() != null) r.setContactPhone(req.contactPhone());
+        if (req.city() != null) r.setCity(req.city());
+        if (req.state() != null) r.setState(req.state());
+        if (req.grades() != null) r.setGrades(req.grades());
+        if (req.notes() != null) r.setNotes(req.notes());
+        if (req.seatsRequested() != null) r.setSeatsRequested(req.seatsRequested());
+        if (req.seatsConfirmed() != null) r.setSeatsConfirmed(req.seatsConfirmed());
+
+        return reservationRepository.save(r);
+    }
+
+>>>>>>> f179150 (se agrega dto para editar por completo las reservas)
 
     @Transactional
     public TicketReservation confirmReservation(Long id, UpdateSeatsRequest req) {

@@ -25,7 +25,11 @@ public class MailService {
         this.mailSender = mailSender;
     }
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> f179150 (se agrega dto para editar por completo las reservas)
 
     /**
      * Email cuando se crea / registra una nueva fecha de show (ShowDate).
