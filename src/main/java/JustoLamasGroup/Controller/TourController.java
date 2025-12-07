@@ -29,6 +29,12 @@ public class TourController {
         return bookingService.getAllTours();
     }
 
+    //editar tour
+    @PutMapping("/{id}")
+    public Tour update(@PathVariable Long id, @RequestBody Tour updatedTour) {
+        return bookingService.updateTour(id, updatedTour);
+    }
+
     // eliminar un tour por id
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

@@ -2,10 +2,7 @@
 package JustoLamasGroup.Service;
 
 import JustoLamasGroup.DTO.ReserveTicketLeadRequest;
-<<<<<<< HEAD
-=======
 import JustoLamasGroup.DTO.UpdateReservationFullRequest;
->>>>>>> f179150 (se agrega dto para editar por completo las reservas)
 import JustoLamasGroup.DTO.UpdateSeatsRequest;
 import JustoLamasGroup.Entity.ShowDate;
 import JustoLamasGroup.Entity.TicketReservation;
@@ -165,11 +162,7 @@ public class BookingService {
         return showDateRepository.save(showDate);
     }
 
-<<<<<<< HEAD
-    // 🔥 NUEVO – eliminar reserva
-=======
     //  eliminar reserva
->>>>>>> f179150 (se agrega dto para editar por completo las reservas)
     public void deleteReservation(Long ShowDateId) {
         if (!reservationRepository.existsById(ShowDateId)) {
             throw new RuntimeException("Reservation not found");
@@ -177,11 +170,7 @@ public class BookingService {
         reservationRepository.deleteById(ShowDateId);
     }
 
-<<<<<<< HEAD
-    // 🔥 NUEVO – actualizar asientos
-=======
     //  actualizar asientos
->>>>>>> f179150 (se agrega dto para editar por completo las reservas)
     public TicketReservation updateSeats(Long id, UpdateSeatsRequest req) {
         TicketReservation reservation =
                 reservationRepository.findById(id)
@@ -214,8 +203,6 @@ public class BookingService {
         return reservationRepository.findByShowDateId(showDateId);
     }
 
-<<<<<<< HEAD
-=======
     // Actualización completa de la reserva
     public TicketReservation updateReservationFull(Long id, UpdateReservationFullRequest req) {
 
@@ -236,7 +223,6 @@ public class BookingService {
         return reservationRepository.save(r);
     }
 
->>>>>>> f179150 (se agrega dto para editar por completo las reservas)
 
     @Transactional
     public TicketReservation confirmReservation(Long id, UpdateSeatsRequest req) {
