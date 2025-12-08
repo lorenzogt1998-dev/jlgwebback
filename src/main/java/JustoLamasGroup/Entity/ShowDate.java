@@ -17,7 +17,7 @@ public class ShowDate {
 
 
     @ManyToOne
-    private Tour tour;   // ⬅️ NUEVO: a qué tour pertenece esta fecha
+    private Tour tour;   // NUEVO: a qué tour pertenece esta fecha
 
     private LocalDate date;
     private String city;

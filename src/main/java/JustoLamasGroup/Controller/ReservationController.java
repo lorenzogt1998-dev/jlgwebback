@@ -8,8 +8,10 @@ import JustoLamasGroup.DTO.UpdateSeatsRequest;
 import JustoLamasGroup.Entity.TicketReservation;
 import JustoLamasGroup.Service.BookingService;
 import JustoLamasGroup.Service.MailService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -67,9 +69,10 @@ public class ReservationController {
     }
 
     // LIST BY SHOWDATE
-    @GetMapping("/by-show/{showDateId}")
-    public List<TicketReservation> listByShow(@PathVariable Long showDateId) {
-        return bookingService.getReservationsByShowDate(showDateId);
+    @GetMapping("/by-show-date/{showDate}")
+    public List<TicketReservation> listByShowDate(
+            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate showDate) {
+        return bookingService.getReservationsByShowDate(showDate);
     }
 
     // Editar todos los campos de una reservation

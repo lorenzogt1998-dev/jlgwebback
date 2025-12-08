@@ -235,8 +235,8 @@ public class BookingService {
                 .orElseThrow(() -> new IllegalArgumentException("Reservation not found: " + id));
     }
 
-    public List<TicketReservation> getReservationsByShowDate(Long showDateId) {
-        return reservationRepository.findByShowDateId(showDateId);
+    public List<TicketReservation> getReservationsByShowDate(LocalDate date) {
+        return reservationRepository.findByShowDate_Date(date);
     }
 
     // Actualización completa de la reserva
