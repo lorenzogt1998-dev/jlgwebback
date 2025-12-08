@@ -9,7 +9,7 @@ public record ShowDateExternalRequest(
         String country,
         String venueName,
         String venueType,
-        String timeSlot,
+        java.time.LocalTime timeSlot,
         String status
 ) {
     public static ShowDateExternalRequest fromEntity(JustoLamasGroup.Entity.ShowDate showDate) {

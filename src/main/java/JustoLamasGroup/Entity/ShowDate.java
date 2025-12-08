@@ -4,9 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 @Entity
@@ -27,8 +27,8 @@ public class ShowDate {
     private String venueName;      // teatro / escuela / etc.
     private String venueType;      // SCHOOL, THEATER, OTHER
 
-    // por ejemplo: mañana/tarde/noche
-    private String timeSlot;
+    // por ejemplo: 10.00/20.00
+    private LocalTime timeSlot;
 
     // estado de la fecha: ABIERTA, COMPLETA, CANCELADA
     private String status;
@@ -98,11 +98,11 @@ public class ShowDate {
         this.venueType = venueType;
     }
 
-    public String getTimeSlot() {
+    public LocalTime getTimeSlot() {
         return timeSlot;
     }
 
-    public void setTimeSlot(String timeSlot) {
+    public void setTimeSlot(LocalTime timeSlot) {
         this.timeSlot = timeSlot;
     }
 

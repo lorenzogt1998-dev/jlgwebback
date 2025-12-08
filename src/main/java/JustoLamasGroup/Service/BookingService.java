@@ -10,9 +10,13 @@ import JustoLamasGroup.Entity.Tour;
 import JustoLamasGroup.Repository.ShowDateRepository;
 import JustoLamasGroup.Repository.TicketReservationRepository;
 import JustoLamasGroup.Repository.TourRepository;
+import JustoLamasGroup.Specifications.ShowDateSpecification;
 import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -90,6 +94,22 @@ public class BookingService {
 
     public List<ShowDate> getAllShowDates() {
         return showDateRepository.findAll();
+    }
+
+    public List<ShowDate> searchShowDates(String city, String venueName, LocalDate date) {
+        Specification<ShowDate> spec = Specification.where(null);
+
+        if (city != null && !city.isEmpty()) {
+            spec = spec.and(ShowDateSpecification.hasCity(city));
+        }
+        if (venueName != null && !venueName.isEmpty()) {
+            spec = spec.and(ShowDateSpecification.hasVenue(venueName));
+        }
+        if (date != null) {
+            spec = spec.and(ShowDateSpecification.hasDate(date));
+        }
+
+        return showDateRepository.findAll(spec);
     }
 
     // ---------- RESERVAS ----------

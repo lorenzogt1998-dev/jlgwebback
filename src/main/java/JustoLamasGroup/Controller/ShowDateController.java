@@ -6,9 +6,11 @@ import JustoLamasGroup.DTO.UpdateShowStatusRequest;
 import JustoLamasGroup.Entity.ShowDate;
 import JustoLamasGroup.Service.BookingService;
 import JustoLamasGroup.Service.MailService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -62,6 +64,20 @@ public class ShowDateController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         bookingService.deleteShowDate(id);
         return ResponseEntity.noContent().build();
+    }
+
+    //Obtener shows por: city, date or venueName
+    // el formato esperado para date es YYYY-MM-DD.
+    //Ejemplo de request:
+    //busqueda de fecha: ..api/show-dates/search?date=19/12/2025
+    //GET http://localhost:8080/api/show-dates/search?city=denver&venueName=school&date=2025-12-19
+    @GetMapping("/search")
+    public List<ShowDate> search(
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) String venueName,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date
+    ) {
+        return bookingService.searchShowDates(city, venueName, date);
     }
 
     // Obtener una sola fecha por id
