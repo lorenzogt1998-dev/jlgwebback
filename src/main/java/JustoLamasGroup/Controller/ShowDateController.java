@@ -15,7 +15,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/show-dates")
-@CrossOrigin(origins = "http://localhost:5173")
 public class ShowDateController {
 
     private final BookingService bookingService;
