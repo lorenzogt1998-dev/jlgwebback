@@ -1,3 +1,4 @@
+// src/main/java/JustoLamasGroup/Config/CorsConfig.java
 package JustoLamasGroup.Config;
 
 import org.springframework.context.annotation.Bean;
@@ -14,12 +15,14 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins(
-                                "http://localhost:5173",             // dev
-                                "https://jlgwebfront.vercel.app"     // ⭐ frontend en producción
+                        // 👇 DEV
+                        .allowedOriginPatterns(
+                                "http://localhost:5173",
+                                "https://jlgwebfront.vercel.app"
                         )
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                         .allowedHeaders("*")
+                        .exposedHeaders("Authorization", "Content-Type")
                         .allowCredentials(true);
             }
         };
