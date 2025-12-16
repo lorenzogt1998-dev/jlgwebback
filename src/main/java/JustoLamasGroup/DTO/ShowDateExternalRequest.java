@@ -1,6 +1,7 @@
 package JustoLamasGroup.DTO;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public record ShowDateExternalRequest(
         LocalDate date,
@@ -9,7 +10,8 @@ public record ShowDateExternalRequest(
         String country,
         String venueName,
         String venueType,
-        java.time.LocalTime timeSlot,
+        LocalTime startTime,
+        LocalTime endTime,
         String status
 ) {
     public static ShowDateExternalRequest fromEntity(JustoLamasGroup.Entity.ShowDate showDate) {
@@ -20,7 +22,8 @@ public record ShowDateExternalRequest(
                 showDate.getCountry(),
                 showDate.getVenueName(),
                 showDate.getVenueType(),
-                showDate.getTimeSlot(),
+                showDate.getStartTime(),
+                showDate.getEndTime(),
                 showDate.getStatus()
         );
     }

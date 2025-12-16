@@ -45,7 +45,7 @@ public class MailService {
                 País: %s
                 Lugar / Venue: %s
                 Tipo de venue: %s
-                Horario / Time slot: %s
+                Horario: %s - %s
                 Status: %s
                 """.formatted(
                 request.date(),
@@ -54,7 +54,8 @@ public class MailService {
                 request.country(),
                 request.venueName(),
                 request.venueType(),
-                request.timeSlot(),
+                request.startTime(),
+                request.endTime(),
                 request.status()
         );
 

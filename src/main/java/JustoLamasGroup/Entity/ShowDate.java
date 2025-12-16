@@ -27,8 +27,8 @@ public class ShowDate {
     private String venueName;      // teatro / escuela / etc.
     private String venueType;      // SCHOOL, THEATER, OTHER
 
-    // por ejemplo: 10.00/20.00
-    private LocalTime timeSlot;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     // estado de la fecha: ABIERTA, COMPLETA, CANCELADA
     private String status;
@@ -98,19 +98,27 @@ public class ShowDate {
         this.venueType = venueType;
     }
 
-    public LocalTime getTimeSlot() {
-        return timeSlot;
-    }
-
-    public void setTimeSlot(LocalTime timeSlot) {
-        this.timeSlot = timeSlot;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 }

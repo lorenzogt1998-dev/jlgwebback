@@ -71,6 +71,13 @@ public class BookingService {
     @Transactional
     public ShowDate createShowDate(Long tourId, ShowDate showDate) {
 
+        //0 validacion de horario start-end time
+        if (showDate.getStartTime() != null && showDate.getEndTime() != null) {
+            if (showDate.getEndTime().isBefore(showDate.getStartTime())) {
+                throw new IllegalArgumentException("endTime must be after startTime");
+            }
+        }
+
         // 1) Buscar el tour
         Tour tour = tourRepository.findById(tourId)
                 .orElseThrow(() -> new IllegalArgumentException("Tour not found: " + tourId));
