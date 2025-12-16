@@ -8,8 +8,7 @@ public record ShowDateExternalRequest(
         String city,
         String state,
         String country,
-        String venueName,
-        String venueType,
+        String schoolName,
         LocalTime startTime,
         LocalTime endTime,
         String status
@@ -20,8 +19,7 @@ public record ShowDateExternalRequest(
                 showDate.getCity(),
                 showDate.getState(),
                 showDate.getCountry(),
-                showDate.getVenueName(),
-                showDate.getVenueType(),
+                showDate.getSchoolName(),
                 showDate.getStartTime(),
                 showDate.getEndTime(),
                 showDate.getStatus()

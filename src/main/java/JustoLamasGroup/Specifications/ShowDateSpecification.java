@@ -15,10 +15,10 @@ public class ShowDateSpecification {
         };
     }
 
-    public static Specification<ShowDate> hasVenue(String venueName) {
+    public static Specification<ShowDate> hasSchool(String schoolName) {
         return (root, query, builder) -> {
-            if (venueName == null || venueName.isEmpty()) return null;
-            return builder.like(builder.lower(root.get("venueName")), "%" + venueName.toLowerCase() + "%");
+            if (schoolName == null || schoolName.isEmpty()) return null;
+            return builder.like(builder.lower(root.get("schoolName")), "%" + schoolName.toLowerCase() + "%");
         };
     }
 

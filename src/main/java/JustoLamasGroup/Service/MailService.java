@@ -44,7 +44,6 @@ public class MailService {
                 Estado: %s
                 País: %s
                 Lugar / Venue: %s
-                Tipo de venue: %s
                 Horario: %s - %s
                 Status: %s
                 """.formatted(
@@ -52,8 +51,7 @@ public class MailService {
                 request.city(),
                 request.state(),
                 request.country(),
-                request.venueName(),
-                request.venueType(),
+                request.schoolName(),
                 request.startTime(),
                 request.endTime(),
                 request.status()

@@ -103,14 +103,14 @@ public class BookingService {
         return showDateRepository.findAll();
     }
 
-    public List<ShowDate> searchShowDates(String city, String venueName, LocalDate date) {
+    public List<ShowDate> searchShowDates(String city, String schoolName, LocalDate date) {
         Specification<ShowDate> spec = Specification.where(null);
 
         if (city != null && !city.isEmpty()) {
             spec = spec.and(ShowDateSpecification.hasCity(city));
         }
-        if (venueName != null && !venueName.isEmpty()) {
-            spec = spec.and(ShowDateSpecification.hasVenue(venueName));
+        if (schoolName != null && !schoolName.isEmpty()) {
+            spec = spec.and(ShowDateSpecification.hasSchool(schoolName));
         }
         if (date != null) {
             spec = spec.and(ShowDateSpecification.hasDate(date));

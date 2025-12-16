@@ -65,7 +65,7 @@ public class ShowDateController {
         return ResponseEntity.noContent().build();
     }
 
-    //Obtener shows por: city, date or venueName
+    //Obtener shows por: city, date or schoolName
     // el formato esperado para date es YYYY-MM-DD.
     //Ejemplo de request:
     //busqueda de fecha: ..api/show-dates/search?date=19/12/2025

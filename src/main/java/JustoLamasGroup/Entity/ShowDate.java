@@ -24,8 +24,8 @@ public class ShowDate {
     private String state;
     private String country;
 
-    private String venueName;      // teatro / escuela / etc.
-    private String venueType;      // SCHOOL, THEATER, OTHER
+    private String schoolName;      // teatro / escuela / etc.
+
 
     private LocalTime startTime;
     private LocalTime endTime;
@@ -82,20 +82,12 @@ public class ShowDate {
         this.country = country;
     }
 
-    public String getVenueName() {
-        return venueName;
+    public String getSchoolName() {
+        return schoolName;
     }
 
-    public void setVenueName(String venueName) {
-        this.venueName = venueName;
-    }
-
-    public String getVenueType() {
-        return venueType;
-    }
-
-    public void setVenueType(String venueType) {
-        this.venueType = venueType;
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
     }
 
     public String getStatus() {
