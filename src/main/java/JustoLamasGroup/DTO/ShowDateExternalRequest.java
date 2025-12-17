@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 public record ShowDateExternalRequest(
         LocalDate date,
-        String adress,
+        String address,
         String schoolName,
         LocalTime startTime,
         LocalTime endTime,

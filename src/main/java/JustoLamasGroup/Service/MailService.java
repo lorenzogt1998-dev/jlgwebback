@@ -46,7 +46,7 @@ public class MailService {
                 Status: %s
                 """.formatted(
                 request.date(),
-                request.adress(),
+                request.address(),
                 request.schoolName(),
                 request.startTime(),
                 request.endTime(),
