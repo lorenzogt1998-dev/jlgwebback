@@ -8,10 +8,10 @@ import java.time.LocalDate;
 
 public class ShowDateSpecification {
 
-    public static Specification<ShowDate> hasCity(String city) {
+    public static Specification<ShowDate> hasAddress(String address) {
         return (root, query, builder) -> {
-            if (city == null || city.isEmpty()) return null;
-            return builder.like(builder.lower(root.get("city")), "%" + city.toLowerCase() + "%");
+            if (address == null || address.isEmpty()) return null;
+            return builder.like(builder.lower(root.get("address")), "%" + address.toLowerCase() + "%");
         };
     }
 

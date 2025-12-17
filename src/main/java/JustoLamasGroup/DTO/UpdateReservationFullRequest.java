@@ -5,9 +5,7 @@ public record UpdateReservationFullRequest(
         String contactName,
         String contactEmail,
         String contactPhone,
-        String city,
-        String state,
-        String grades,
+        String address,
         String notes,
         Integer seatsRequested,
         Integer seatsConfirmed

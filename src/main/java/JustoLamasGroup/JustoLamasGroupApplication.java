@@ -4,7 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JustoLamasGroupApplication {
+public class
+
+JustoLamasGroupApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JustoLamasGroupApplication.class, args);

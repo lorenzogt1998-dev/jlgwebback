@@ -65,7 +65,7 @@ public class ShowDateController {
         return ResponseEntity.noContent().build();
     }
 
-    //Obtener shows por: city, date or schoolName
+    //Obtener shows por: address, date or schoolName
     // el formato esperado para date es YYYY-MM-DD.
     //Ejemplo de request:
     //busqueda de fecha: ..api/show-dates/search?date=19/12/2025
@@ -73,10 +73,10 @@ public class ShowDateController {
     @GetMapping("/search")
     public List<ShowDate> search(
             @RequestParam(required = false) String city,
-            @RequestParam(required = false) String venueName,
+            @RequestParam(required = false) String schoolName,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date
     ) {
-        return bookingService.searchShowDates(city, venueName, date);
+        return bookingService.searchShowDates(city, schoolName, date);
     }
 
     // Obtener una sola fecha por id

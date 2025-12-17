@@ -41,16 +41,12 @@ public class MailService {
 
                 Fecha: %s
                 Ciudad: %s
-                Estado: %s
-                País: %s
-                Lugar / Venue: %s
+                Escuela: %s
                 Horario: %s - %s
                 Status: %s
                 """.formatted(
                 request.date(),
-                request.city(),
-                request.state(),
-                request.country(),
+                request.adress(),
                 request.schoolName(),
                 request.startTime(),
                 request.endTime(),
@@ -117,32 +113,29 @@ public class MailService {
 
                 CONTACT INFORMATION
                 - Full Name: %s
-                - Role / Title: %s
                 - Email: %s
                 - Phone: %s
 
                 SCHOOL INFORMATION
                 - School Name: %s
+                - School phone: %s
                 - Address: %s
                 - Estimated Capacity (students): %s
 
-                PREFERRED DATE & TIME
-                - Preferred Date (or window): %s
-                - Preferred Time: %s
+                PREFERRED DATE
+                - Preferred Date: %s
 
                 ADDITIONAL DETAILS
                 %s
                 """.formatted(
                 r.contactName(),
-                r.role(),
                 r.email(),
                 r.cellphone(),
-                r.schoolphone(),
                 r.school(),
+                r.schoolphone(),
                 r.address(),
                 r.capacity(),
                 r.preferredDate(),
-                r.preferredTime(),
                 r.notes()
         );
 
@@ -166,29 +159,24 @@ public class MailService {
 
                 CONTACT INFORMATION
                 - Full Name: %s
-                - Role / Title: %s
                 - Email: %s
                 - Phone: %s
 
                 SCHOOL RESERVATION
                 - School Name: %s
-                - City: %s
-                - State / Province: %s
+                - School Address: %s
                 - Number of Students: %s
-                - Grade Levels: %s
 
                 NOTES / SPECIAL REQUESTS
                 %s
                 """.formatted(
                 r.tourDate(),
                 r.contactName(),
-                r.role(),
                 r.email(),
                 r.phone(),
                 r.school(),
                 r.schoolAddress(),
                 r.students(),
-                r.grades(),
                 r.notes()
         );
 

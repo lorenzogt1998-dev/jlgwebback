@@ -20,9 +20,7 @@ public class ShowDate {
     private Tour tour;   // NUEVO: a qué tour pertenece esta fecha
 
     private LocalDate date;
-    private String city;
-    private String state;
-    private String country;
+    private String address;
 
     private String schoolName;      // teatro / escuela / etc.
 
@@ -58,28 +56,12 @@ public class ShowDate {
         this.date = date;
     }
 
-    public String getCity() {
-        return city;
+    public String getAddress() {
+        return address;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getSchoolName() {

@@ -5,9 +5,7 @@ import java.time.LocalTime;
 
 public record ShowDateExternalRequest(
         LocalDate date,
-        String city,
-        String state,
-        String country,
+        String adress,
         String schoolName,
         LocalTime startTime,
         LocalTime endTime,
@@ -16,9 +14,7 @@ public record ShowDateExternalRequest(
     public static ShowDateExternalRequest fromEntity(JustoLamasGroup.Entity.ShowDate showDate) {
         return new ShowDateExternalRequest(
                 showDate.getDate(),
-                showDate.getCity(),
-                showDate.getState(),
-                showDate.getCountry(),
+                showDate.getAddress(),
                 showDate.getSchoolName(),
                 showDate.getStartTime(),
                 showDate.getEndTime(),

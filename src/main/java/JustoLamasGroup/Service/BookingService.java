@@ -103,11 +103,11 @@ public class BookingService {
         return showDateRepository.findAll();
     }
 
-    public List<ShowDate> searchShowDates(String city, String schoolName, LocalDate date) {
+    public List<ShowDate> searchShowDates(String address, String schoolName, LocalDate date) {
         Specification<ShowDate> spec = Specification.where(null);
 
-        if (city != null && !city.isEmpty()) {
-            spec = spec.and(ShowDateSpecification.hasCity(city));
+        if (address != null && !address.isEmpty()) {
+            spec = spec.and(ShowDateSpecification.hasAddress(address));
         }
         if (schoolName != null && !schoolName.isEmpty()) {
             spec = spec.and(ShowDateSpecification.hasSchool(schoolName));
@@ -256,9 +256,7 @@ public class BookingService {
         if (req.contactName() != null) r.setContactName(req.contactName());
         if (req.contactEmail() != null) r.setContactEmail(req.contactEmail());
         if (req.contactPhone() != null) r.setContactPhone(req.contactPhone());
-        if (req.city() != null) r.setCity(req.city());
-        if (req.state() != null) r.setState(req.state());
-        if (req.grades() != null) r.setGrades(req.grades());
+        if (req.address() != null) r.setAddress(req.address());
         if (req.notes() != null) r.setNotes(req.notes());
         if (req.seatsRequested() != null) r.setSeatsRequested(req.seatsRequested());
         if (req.seatsConfirmed() != null) r.setSeatsConfirmed(req.seatsConfirmed());
