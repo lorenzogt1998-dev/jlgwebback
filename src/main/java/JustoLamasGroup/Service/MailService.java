@@ -154,9 +154,6 @@ public class MailService {
         String body = """
                 Nueva reserva de tickets (lead)
 
-                TOUR DATE
-                - Selected option: %s
-
                 CONTACT INFORMATION
                 - Full Name: %s
                 - Email: %s
@@ -170,7 +167,6 @@ public class MailService {
                 NOTES / SPECIAL REQUESTS
                 %s
                 """.formatted(
-                r.tourDate(),
                 r.contactName(),
                 r.email(),
                 r.phone(),

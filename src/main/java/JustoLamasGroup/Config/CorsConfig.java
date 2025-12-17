@@ -18,8 +18,9 @@ public class CorsConfig {
                         // 👇 DEV
                         .allowedOriginPatterns(
                                 "http://localhost:5173",
-                                "https://jlgwebfront.vercel.app"
-                        )
+                                "https://jlgwebfront.vercel.app",
+                                "https://justolamasgroup.com",
+                                "https://www.justolamasgroup.com")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                         .allowedHeaders("*")
                         .exposedHeaders("Authorization", "Content-Type")
