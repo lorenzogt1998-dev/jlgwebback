@@ -1,12 +1,10 @@
 package JustoLamasGroup.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 
 @Entity
@@ -18,18 +16,17 @@ public class ShowDate {
 
     @ManyToOne
     private Tour tour;   // NUEVO: a qué tour pertenece esta fecha
-
     private LocalDate date;
     private String address;
-
     private String schoolName;      // teatro / escuela / etc.
-
-
     private LocalTime startTime;
     private LocalTime endTime;
-
     // estado de la fecha: ABIERTA, COMPLETA, CANCELADA
     private String status;
+    private boolean deleted = false;
+
+    @OneToMany(mappedBy = "showDate", cascade = CascadeType.REMOVE)
+    private List<TicketReservation> reservations;
 
 
     public Long getId() {
@@ -94,5 +91,13 @@ public class ShowDate {
 
     public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

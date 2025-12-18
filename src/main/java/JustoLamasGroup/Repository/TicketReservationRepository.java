@@ -11,4 +11,9 @@ public interface TicketReservationRepository extends JpaRepository<TicketReserva
     // Buscar reservas por la fecha del show (ShowDate.date)
     List<TicketReservation> findByShowDate_Date(LocalDate date);
 
+    // Contar reservas asociadas a un show específico (CLAVE para el delete)
+    long countByShowDate_Id(Long showDateId);
+
+    // Listar todas las reservas asociadas a un show específico
+    List<TicketReservation> findByShowDate_Id(Long showDateId);
 }

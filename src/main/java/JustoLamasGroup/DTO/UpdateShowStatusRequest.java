@@ -1,4 +1,13 @@
 package JustoLamasGroup.DTO;
 
-public record UpdateShowStatusRequest(String status) {
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public record UpdateShowStatusRequest(
+        String schoolName,
+        String address,
+        LocalDate date,
+        LocalTime startTime,
+        LocalTime endTime,
+        String status) {
 }

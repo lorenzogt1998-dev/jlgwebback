@@ -4,6 +4,7 @@ package JustoLamasGroup.Service;
 import JustoLamasGroup.DTO.ReserveTicketLeadRequest;
 import JustoLamasGroup.DTO.UpdateReservationFullRequest;
 import JustoLamasGroup.DTO.UpdateSeatsRequest;
+import JustoLamasGroup.DTO.UpdateShowStatusRequest;
 import JustoLamasGroup.Entity.ShowDate;
 import JustoLamasGroup.Entity.TicketReservation;
 import JustoLamasGroup.Entity.Tour;
@@ -14,6 +15,8 @@ import JustoLamasGroup.Specifications.ShowDateSpecification;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import JustoLamasGroup.Exception.ShowDateHasReservationsException;
+
 
 
 import java.time.LocalDate;
@@ -119,6 +122,24 @@ public class BookingService {
         return showDateRepository.findAll(spec);
     }
 
+    @Transactional
+    public void deleteShowDate(Long id, boolean force) {
+        ShowDate showDate = showDateRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("ShowDate no encontrado"));
+
+        List<TicketReservation> reservations = reservationRepository.findByShowDate_Id(id);
+
+        if (!force && !reservations.isEmpty()) {
+            throw new ShowDateHasReservationsException(id); // lanza el 409
+        }
+
+        // Si force=true, eliminamos en cascada
+        reservationRepository.deleteAll(reservations);
+        showDateRepository.delete(showDate);
+    }
+
+
+
     // ---------- RESERVAS ----------
 
     @Transactional
@@ -180,13 +201,6 @@ public class BookingService {
         return reservationRepository.findAll();
     }
 
-    public void deleteShowDate(Long id) {
-        // opcional: validar que exista antes
-        if (!showDateRepository.existsById(id)) {
-            throw new IllegalArgumentException("ShowDate not found: " + id);
-        }
-        showDateRepository.deleteById(id);
-    }
 
     public void deleteTour(Long id) {
         // opcional: validar que exista antes
@@ -197,11 +211,17 @@ public class BookingService {
     }
 
 
-    public ShowDate updateShowStatus(Long id, String newStatus) {
+    // modificar el estado del show open/close
+    public ShowDate updateShowStatus(Long id, UpdateShowStatusRequest req) {
         ShowDate showDate = showDateRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("ShowDate not found: " + id));
+        if (req.schoolName() != null) showDate.setSchoolName(req.schoolName());
+        if (req.address() != null) showDate.setAddress(req.address());
+        if (req.date() != null) showDate.setDate(req.date());
+        if (req.startTime() != null) showDate.setStartTime(req.startTime());
+        if (req.endTime() != null) showDate.setEndTime(req.endTime());
+        if (req.status() != null) showDate.setStatus(req.status());
 
-        showDate.setStatus(newStatus); // asumiendo que tenés getStatus/setStatus en la entidad
         return showDateRepository.save(showDate);
     }
 

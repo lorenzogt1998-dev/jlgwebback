@@ -55,14 +55,17 @@ public class ShowDateController {
     @PatchMapping("/{id}/status")
     public ShowDate updateStatus(@PathVariable Long id,
                                  @RequestBody UpdateShowStatusRequest req) {
-        return bookingService.updateShowStatus(id, req.status());
+        return bookingService.updateShowStatus(id, req);
     }
 
     // eliminar una fecha de show por id
+    // DELETE forzado → /api/show-dates/152?force=true
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        bookingService.deleteShowDate(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> deleteShowDate(
+            @PathVariable Long id,
+            @RequestParam (defaultValue = "false") boolean force){
+        bookingService.deleteShowDate(id, force);
+        return ResponseEntity.ok().build();
     }
 
     //Obtener shows por: address, date or schoolName
