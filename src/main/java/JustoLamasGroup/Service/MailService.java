@@ -2,6 +2,8 @@
 package JustoLamasGroup.Service;
 
 import JustoLamasGroup.DTO.*;
+import JustoLamasGroup.Entity.ShowDate;
+import JustoLamasGroup.Repository.ShowDateRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class MailService {
 
     private final JavaMailSender mailSender;
+    private final ShowDateRepository showDateRepository;
 
     @Value("${app.mail.to.primary}")
     private String primaryTo;
@@ -21,8 +24,10 @@ public class MailService {
     @Value("${app.mail.from}")
     private String from;
 
-    public MailService(JavaMailSender mailSender) {
+    public MailService(JavaMailSender mailSender,
+                       ShowDateRepository showDateRepository) {
         this.mailSender = mailSender;
+        this.showDateRepository = showDateRepository;
     }
 
     /**
@@ -151,8 +156,23 @@ public class MailService {
         message.setCc(ccTo);
         message.setSubject("[RESERVE TICKET] Nueva reserva preliminar");
 
+        ShowDate showDate = null;
+
+        if (r.showDateId() != null) {
+            showDate = showDateRepository
+                    .findById(r.showDateId())
+                    .orElse(null);
+        }
+
         String body = """
                 Nueva reserva de tickets (lead)
+                
+                SHOW DATE
+                - ID: %s
+                - Date: %s
+                - School: %s
+                - Address: %s
+                - Time: %s - %s
 
                 CONTACT INFORMATION
                 - Full Name: %s
@@ -167,6 +187,12 @@ public class MailService {
                 NOTES / SPECIAL REQUESTS
                 %s
                 """.formatted(
+                showDate != null ? showDate.getId() : "N/A",
+                showDate != null ? showDate.getDate() : "N/A",
+                showDate != null ? showDate.getSchoolName() : "N/A",
+                showDate != null ? showDate.getAddress() : "N/A",
+                showDate != null ? showDate.getStartTime() : "N/A",
+                showDate != null ? showDate.getEndTime() : "N/A",
                 r.contactName(),
                 r.email(),
                 r.phone(),
