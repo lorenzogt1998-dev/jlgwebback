@@ -10,5 +10,6 @@ public record ReserveTicketLeadRequest(
         String school,
         String schoolAddress,
         Integer students,
+        Integer adults,
         String notes
 ) {}

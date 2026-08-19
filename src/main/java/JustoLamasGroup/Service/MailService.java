@@ -37,7 +37,10 @@ public class MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(primaryTo);
-        message.setCc(ccTo);
+
+        if (ccTo != null && !ccTo.isBlank() && !ccTo.equalsIgnoreCase(primaryTo)) {
+            message.setCc(ccTo);
+        }
 
         message.setSubject("[SET A DATE] Nueva fecha de show creada");
 
@@ -69,7 +72,10 @@ public class MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(primaryTo);
-        message.setCc(ccTo);
+
+        if (ccTo != null && !ccTo.isBlank() && !ccTo.equalsIgnoreCase(primaryTo)) {
+            message.setCc(ccTo);
+        }
 
         message.setSubject("[RESERVE TICKET] Nueva reserva");
 
@@ -110,7 +116,10 @@ public class MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(primaryTo);
-        message.setCc(ccTo);
+
+        if (ccTo != null && !ccTo.isBlank() && !ccTo.equalsIgnoreCase(primaryTo)) {
+            message.setCc(ccTo);
+        }
         message.setSubject("[SET A DATE] Nueva solicitud de fecha");
 
         String body = """
@@ -153,7 +162,10 @@ public class MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(primaryTo);
-        message.setCc(ccTo);
+
+        if (ccTo != null && !ccTo.isBlank() && !ccTo.equalsIgnoreCase(primaryTo)) {
+            message.setCc(ccTo);
+        }
         message.setSubject("[RESERVE TICKET] Nueva reserva preliminar");
 
         ShowDate showDate = null;
@@ -199,6 +211,7 @@ public class MailService {
                 r.school(),
                 r.schoolAddress(),
                 r.students(),
+                r.adults(),
                 r.notes()
         );
 
@@ -211,7 +224,10 @@ public class MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(primaryTo);
-        message.setCc(ccTo);
+
+        if (ccTo != null && !ccTo.isBlank() && !ccTo.equalsIgnoreCase(primaryTo)) {
+            message.setCc(ccTo);
+        }
 
         message.setSubject("[CONTACT] New message from website");
 

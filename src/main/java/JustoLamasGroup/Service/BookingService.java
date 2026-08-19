@@ -158,8 +158,8 @@ public class BookingService {
         reservation.setContactPhone(req.phone());
 
 
-
         reservation.setSeatsRequested(req.students());
+        reservation.setSeatsRequested(req.adults());
         // si al inicio no confirmás, podés dejar seatsConfirmed = null o = seatsRequested
         reservation.setSeatsConfirmed(null);
 
