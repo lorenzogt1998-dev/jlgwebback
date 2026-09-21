@@ -3,6 +3,7 @@ package JustoLamasGroup.Service;
 
 import JustoLamasGroup.DTO.*;
 import JustoLamasGroup.Entity.ShowDate;
+import JustoLamasGroup.Entity.TicketReservation;
 import JustoLamasGroup.Repository.ShowDateRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
