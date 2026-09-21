@@ -195,6 +195,7 @@ public class MailService {
                 - School Name: %s
                 - School Address: %s
                 - Number of Students: %s
+                - Number of Adults: %s
 
                 NOTES / SPECIAL REQUESTS
                 %s
@@ -245,6 +246,50 @@ public class MailService {
                         request.getEmail(),
                         request.getEnquiry()
                 );
+
+        message.setText(body);
+        mailSender.send(message);
+    }
+
+    /**
+     * Email de respuesta del admin a un cliente que hizo una reserva de tickets
+     */
+    public void sendAdminReplyToReservation(TicketReservation reservation, String adminMessage, Integer seatsConfirmed) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(from);
+        message.setTo(reservation.getContactEmail());
+
+        message.setSubject("[RESERVE TICKET] Respuesta a tu reserva");
+
+        String body = """
+                Hola %s,
+
+                Gracias por tu reserva de tickets para el show en %s.
+
+                DETALLES DE TU RESERVA
+                - Fecha del show: %s
+                - Escuela: %s
+                - Estudiantes solicitados: %s
+                - Adultos solicitados: %s
+                - Asientos confirmados: %s
+
+                MENSAJE DEL ADMINISTRADOR
+                %s
+
+                Si tienes alguna pregunta, no dudes en contactarnos.
+
+                Saludos,
+                Equipo Justo Lamas
+                """.formatted(
+                reservation.getContactName(),
+                reservation.getShowDate().getSchoolName(),
+                reservation.getShowDate().getDate(),
+                reservation.getOrganizationName(),
+                reservation.getStudents() != null ? reservation.getStudents() : 0,
+                reservation.getAdults() != null ? reservation.getAdults() : 0,
+                seatsConfirmed != null ? seatsConfirmed : "Pendiente",
+                adminMessage
+        );
 
         message.setText(body);
         mailSender.send(message);

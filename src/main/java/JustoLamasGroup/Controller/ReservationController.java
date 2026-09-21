@@ -5,6 +5,7 @@ import JustoLamasGroup.DTO.ReservationExternalRequest;
 import JustoLamasGroup.DTO.ReserveTicketLeadRequest;
 import JustoLamasGroup.DTO.UpdateReservationFullRequest;
 import JustoLamasGroup.DTO.UpdateSeatsRequest;
+import JustoLamasGroup.DTO.AdminReservationReplyRequest;
 import JustoLamasGroup.Entity.TicketReservation;
 import JustoLamasGroup.Service.BookingService;
 import JustoLamasGroup.Service.MailService;
@@ -91,5 +92,19 @@ public class ReservationController {
     ) {
         // por ejemplo: solo actualizar seatsConfirmed y dejar seatsRequested igual
         return bookingService.confirmReservation(id, request);
+    }
+
+    // NUEVO: Responder a una reserva (admin reply)
+    @PostMapping("/{id}/reply")
+    public TicketReservation replyToReservation(
+            @PathVariable Long id,
+            @RequestBody AdminReservationReplyRequest request
+    ) {
+        AdminReservationReplyRequest replyRequest = new AdminReservationReplyRequest(
+                id,
+                request.seatsConfirmed(),
+                request.message()
+        );
+        return bookingService.replyToReservation(replyRequest);
     }
 }

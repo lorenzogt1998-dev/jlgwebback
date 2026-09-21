@@ -29,6 +29,8 @@ public class TicketReservation {
     private String address;
     private String notes;       // detalles adicionales
 
+    private Integer students;
+    private Integer adults;
     private Integer seatsRequested;
     private Integer seatsConfirmed;
 
@@ -65,6 +67,14 @@ public class TicketReservation {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public void setStudents(Integer students) {
+        this.students = students;
+    }
+
+    public void setAdults(Integer adults) {
+        this.adults = adults;
     }
 
     public void setSeatsRequested(Integer seatsRequested) {

@@ -5,6 +5,7 @@ import JustoLamasGroup.DTO.ReserveTicketLeadRequest;
 import JustoLamasGroup.DTO.UpdateReservationFullRequest;
 import JustoLamasGroup.DTO.UpdateSeatsRequest;
 import JustoLamasGroup.DTO.UpdateShowStatusRequest;
+import JustoLamasGroup.DTO.AdminReservationReplyRequest;
 import JustoLamasGroup.Entity.ShowDate;
 import JustoLamasGroup.Entity.TicketReservation;
 import JustoLamasGroup.Entity.Tour;
@@ -31,14 +32,17 @@ public class BookingService {
     private final TicketReservationRepository reservationRepository;
     private final TourRepository tourRepository;
     private final ExternalCalendarClient externalCalendarClient;
+    private final MailService mailService;
 
     public BookingService(ShowDateRepository showDateRepository,
                           TicketReservationRepository reservationRepository, TourRepository tourRepository,
-                          ExternalCalendarClient externalCalendarClient) {
+                          ExternalCalendarClient externalCalendarClient,
+                          MailService mailService) {
         this.showDateRepository = showDateRepository;
         this.reservationRepository = reservationRepository;
         this.tourRepository = tourRepository;
         this.externalCalendarClient = externalCalendarClient;
+        this.mailService = mailService;
     }
 
     // ---------- TOURS ----------
@@ -156,10 +160,11 @@ public class BookingService {
         reservation.setContactName(req.contactName());
         reservation.setContactEmail(req.email());
         reservation.setContactPhone(req.phone());
+        reservation.setAddress(req.schoolAddress());
 
-
-        reservation.setSeatsRequested(req.students());
-        reservation.setSeatsRequested(req.adults());
+        reservation.setStudents(req.students());
+        reservation.setAdults(req.adults());
+        reservation.setSeatsRequested((req.students() != null ? req.students() : 0) + (req.adults() != null ? req.adults() : 0));
         // si al inicio no confirmás, podés dejar seatsConfirmed = null o = seatsRequested
         reservation.setSeatsConfirmed(null);
 
@@ -297,6 +302,20 @@ public class BookingService {
         reservation.setSeatsConfirmed(req.seatsConfirmed());
 
         return reservationRepository.save(reservation);
+    }
+
+    @Transactional
+    public TicketReservation replyToReservation(AdminReservationReplyRequest request) {
+        TicketReservation reservation = reservationRepository.findById(request.reservationId())
+                .orElseThrow(() -> new IllegalArgumentException("Reservation not found: " + request.reservationId()));
+
+        reservation.setSeatsConfirmed(request.seatsConfirmed());
+
+        TicketReservation saved = reservationRepository.save(reservation);
+
+        mailService.sendAdminReplyToReservation(saved, request.message(), request.seatsConfirmed());
+
+        return saved;
     }
 
 }
